@@ -1,0 +1,63 @@
+{% extends "base.html" %} 
+
+{% block content %} 
+
+<form novalidate action="{% url 'tasks:formulario' %}" method="POST">
+  {% csrf_token %} 
+   
+  <!-- Campo Nombre de la Tarea --> 
+  <div class="mb-3"> 
+    <label 
+      for="task_name" 
+      class="form-label">
+      Nombre de la tarea
+    </label> 
+    <input 
+      type="text" 
+      id="task_name" 
+      name="task_name" 
+      class="form-control
+      {% if form.task_name.errors %} 
+        is-invalid
+      {% endif %}" 
+      required> 
+    {% for error in form.task_name.errors %} 
+      <div class="invalid-feedback">{{ error }}</div> 
+    {% endfor %} 
+  </div> 
+  
+  <!-- Campo Descripción --> 
+  <div class="mb-3"> 
+    <label for="task_description" class="form-label">Descripción</label> 
+    <textarea 
+      id="task_description" 
+      name="task_description" 
+      class="form-control
+      {% if form.task_description.errors %} 
+        is-invalid
+      {% endif %}" 
+      required>
+    </textarea> 
+    {% for error in form.task_description.errors %} 
+      <div class="invalid-feedback">
+        {{ error }}
+      </div> 
+    {% endfor %} 
+  </div> 
+  
+  <!-- Botones con mismo tamaño y espaciados --> 
+  <div class="d-flex justify-content-start"> 
+    <input 
+      type="submit" 
+      value="Guardar" 
+      class="btn btn-primary me-2"/> 
+    <button 
+      type="button" 
+      class="btn btn-secondary" 
+      onclick="window.location.href='{% url 'tasks:index' %}'">
+      Cancelar
+    </button> 
+  </div> 
+</form>
+
+{% endblock %}

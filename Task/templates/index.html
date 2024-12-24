@@ -1,0 +1,30 @@
+{% extends "base.html" %} 
+{% block content %}
+
+<div class="container mt-5 text-center" style="background: linear-gradient(to bottom, white, lightblue); padding: 20px; border-radius: 8px;">
+    <h1 class="text-center">Gestión de Tareas</h1>
+    <p class="lead text-center">Administra tus tareas de manera eficiente y organizada</p>
+
+
+    <div class="row"> 
+        {% for task in tasks %} 
+            <div class="col-md-4 mb-4"> 
+                <div class="card"> 
+                    <div class="card-body"> 
+                        <h5 class="card-title">{{ task.task_name }}</h5> 
+                        <a href="{% url 'tasks:detalle' task.id %}" class="btn btn-info btn-sm">Ver</a> 
+                    </div> 
+                </div> 
+            </div> 
+        {% endfor %} 
+    </div>
+
+
+    <button type="button" 
+    class="btn btn-primary" 
+    onclick="window.location.href='{% url 'tasks:formulario' %}'"
+    >Agregar Tarea
+    </button>
+</div>
+{% endblock  %}
+

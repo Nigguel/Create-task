@@ -1,0 +1,69 @@
+{% extends "base.html" %} 
+{% block content %}
+
+<h2 class="text-center display-5 fw-semibold">Editar Tarea</h1> 
+
+<form method="post">
+
+    {% csrf_token %}
+
+    <div class="mb-3">
+        <label 
+            for="task_name" 
+            class="form-label">
+            Nombre:
+        </label> 
+        <input 
+            type="text"
+            class="form-control"
+            id="task_name" 
+            name="task_name" 
+            value="{{ task.task_name }}" 
+            required
+        >
+    </div>
+
+    <div class="mb-3">
+        <label 
+            for="task_description"
+            class="form-label">
+            Descripción:
+        </label> 
+        <textarea 
+            id="task_description" 
+            name="task_description"
+            class="form-control">
+            {{ task.task_description }}
+        </textarea>
+    </div>
+
+    <div>
+        <label 
+            for="task_check"
+            class="form-label">
+            Completada:
+        </label> 
+        <input 
+            type="checkbox" 
+            id="task_check" 
+            name="task_check" 
+            {% if task.task_check %}
+                checked
+            {% endif %}>
+    </div>
+    <div class="d-flex justify-content-start" >
+        <button 
+            type="submit"
+            class="btn btn-primary me-2">
+            Guardar Cambios
+        </button>
+        <button
+            type="button"
+            class="btn btn-secondary"
+            onclick="window.location.href='{% url 'tasks:detalle' task.id %}'">
+            Cancelar
+        </button>
+    </div>
+</form> 
+
+{% endblock  %}

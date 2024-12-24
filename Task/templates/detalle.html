@@ -1,0 +1,38 @@
+{% extends "base.html" %} 
+{% block content %}
+
+<div class="container">
+    <h1 class="text-center display-3 fw-semibold"> {{task.task_name}} </h1>
+    <p> {{task.task_description}} </p>
+    <p> Fecha de creación: {{task.task_date}} </p>
+    <p>completada:  <input 
+        type="checkbox" 
+        id="check_{{ task.id }}" 
+        name="check" 
+        {% if task.task_check %}
+            checked
+        {% endif %}
+        disabled>
+    </p>
+    <div class="text-center">
+        <button 
+            type="button" 
+            class="btn btn-secondary" 
+            onclick="window.location.href='{% url 'tasks:index' %}'">
+            Volver
+        </button>
+        <button 
+            type="button" 
+            class="btn btn-primary" 
+            onclick="window.location.href='{% url 'tasks:actualizar' task.id %}'"
+            >Editar Tarea
+        </button>
+        <button type="button" 
+            class="btn btn-danger" 
+            onclick="window.location.href='{% url 'tasks:eliminar' task.id %}'"
+            >eliminar Tarea
+        </button>
+    </div>
+</div>
+
+{% endblock  %}
